@@ -13,6 +13,17 @@ export const videoPlayerInit = () => {
   const videoTimePassed = document.querySelector('.video-time__passed');
   const videoTimeTotal = document.querySelector('.video-time__total');
 
+  const videoFullScreen = document.querySelector('.video-fullscreen');
+
+  const videoVolume = document.querySelector('.video-volume');
+  const videoVolumeOff = document.querySelector('.fa-volume-down');
+
+
+
+  videoFullScreen.addEventListener('click', () => {
+    videoPlayer.requestFullscreen();
+  });
+
   const toggleIcon = () => {
     if (videoPlayer.paused) {
       videoButtonPlay.classList.remove('fa-pause');
@@ -23,7 +34,8 @@ export const videoPlayerInit = () => {
     }
   };
 
-  const togglePlay = () => {
+  const togglePlay = event => {
+    event.preventDefault();
     if (videoPlayer.paused) {
       videoPlayer.play();
     } else {
@@ -37,6 +49,23 @@ export const videoPlayerInit = () => {
   };
 
   const addZero = n => n < 10 ? '0' + n : n;
+
+  const changeValue = () => {
+    const valueVolume = videoVolume.value;
+    videoPlayer.volume = valueVolume / 100;
+  };
+  // Отключение звука через мут
+  const changeValueOff = () => {
+    if(!videoPlayer.muted){
+      videoVolumeOff.classList.toggle('fa-volume-down');
+      videoVolumeOff.classList.toggle('fa-volume-off');
+      videoPlayer.muted = true;          // Через мут, звук остается на прежнем уровне
+    } else {
+      videoVolumeOff.classList.toggle('fa-volume-down');
+      videoVolumeOff.classList.toggle('fa-volume-off');
+      videoPlayer.muted = false;
+    }
+  };
 
   videoPlayer.addEventListener('click', togglePlay);
   videoButtonPlay.addEventListener('click', togglePlay);
@@ -63,11 +92,25 @@ export const videoPlayerInit = () => {
 
   });
 
-  videoProgress.addEventListener('change', () => {
+  videoProgress.addEventListener('input', () => {
     const duration = videoPlayer.duration;
     const value = videoProgress.value;
 
     videoPlayer.currentTime = (value * duration) / 100;
   })
 
+  videoVolume.addEventListener('input', changeValue);
+
+  videoPlayer.addEventListener('volumechange', () => {
+    videoVolume.value = Math.round(videoPlayer.volume * 100)
+  });
+
+  changeValue();
+
+  //когда происходит клик - вызываем фунцию отключения звука
+  videoVolumeOff.addEventListener('click', changeValueOff);
 };
+
+
+
+  

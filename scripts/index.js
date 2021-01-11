@@ -10,6 +10,10 @@ const deactivationPlayer = () => {
   temp.style.display = 'none';
   playerBtn.forEach(item => item.classList.remove('active'));
   playerBlock.forEach(item => item.classList.remove('active'));
+
+  radioPlayerInit.stop();
+  videoPlayerInit.stop();
+  musicPlayerInit.stop();
 }
 
 // forEack - метод принимает колбек функцию(запущена внутри функции) 
@@ -24,3 +28,4 @@ playerBtn.forEach((btn, i) => btn.addEventListener('click', () => {
 videoPlayerInit();
 radioPlayerInit();
 musicPlayerInit();
+

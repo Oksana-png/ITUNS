@@ -131,18 +131,18 @@
                 value="0"
               />
               <p class="video-time video-time__total">00:00</p>
-              <span class="fa fa-volume-down video-icon"></span>
+              <span class="fa fa-volume-down contol-icon"></span>
               <input
                 type="range"
-                class="video-volume"
+                class="contol-volume video-volume"
                 min="0"
                 max="100"
                 step="1"
                 value="50"
               />
-              <span class="fa fa-volume-up video-icon"></span>
+              <span class="fa fa-volume-up contol-icon"></span>
               <span
-                class="fa fa-window-maximize video-icon video-fullscreen"
+                class="fa fa-window-maximize contol-icon video-fullscreen"
               ></span>
             </nav>
           </div>
@@ -318,6 +318,17 @@
         </div>
         <footer class="footer-fix radio-footer">
           <button class="radio-stop fa fa-play"></button>
+          <span class="fa fa-volume-down contol-icon"></span>
+          <input
+            type="range"
+            class="radio-volume control-volume"
+            min="0"
+            max="100"
+            step="1"
+            value="50"
+          />
+          <span class="fa fa-volume-up contol-icon"></span>
+          <span class="fa fa-volume-off contol-icon radio-mute"></span>
         </footer>
       </article>
     </main>

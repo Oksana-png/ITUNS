@@ -1,3 +1,4 @@
+import { addZero } from './supScipt.js'
 export const videoPlayerInit = () => {
   // video-player
   // video-button__play
@@ -12,16 +13,19 @@ export const videoPlayerInit = () => {
   const videoProgress = document.querySelector('.video-progress');
   const videoTimePassed = document.querySelector('.video-time__passed');
   const videoTimeTotal = document.querySelector('.video-time__total');
-
   const videoFullScreen = document.querySelector('.video-fullscreen');
-
   const videoVolume = document.querySelector('.video-volume');
   const videoVolumeOff = document.querySelector('.fa-volume-down');
 
-
-
   videoFullScreen.addEventListener('click', () => {
     videoPlayer.requestFullscreen();
+  });
+  videoPlayer.addEventListener('fullscreenchange', () => {
+    if(document.fullscreen){
+      videoPlayer.controls = true;
+    } else {
+      videoPlayer.controls = false;
+    }
   });
 
   const toggleIcon = () => {
@@ -47,8 +51,6 @@ export const videoPlayerInit = () => {
     videoPlayer.pause();
     videoPlayer.currentTime = 0;
   };
-
-  const addZero = n => n < 10 ? '0' + n : n;
 
   const changeValue = () => {
     const valueVolume = videoVolume.value;
@@ -109,6 +111,11 @@ export const videoPlayerInit = () => {
 
   //когда происходит клик - вызываем фунцию отключения звука
   videoVolumeOff.addEventListener('click', changeValueOff);
+
+  videoPlayerInit.stop = () => {
+    videoPlayer.pause();
+    toggleIcon();
+  };
 };
 
 
